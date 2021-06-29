@@ -1,6 +1,6 @@
 # Laragento LAravel MAgento Micro services
 
-Magento 2 has legacy outdatab codebased based on Zend Framework 1 and with realy ugly ORM. 
+Magento 2 has legacy outdated code based on Zend Framework 1 with realy ugly ORM. 
 
 This repo is a collection of Model classes that allows you to get data directly from a Magento 2 database using modern **ORM**.
 
