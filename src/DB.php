@@ -34,11 +34,11 @@ class DB
         
          $capsule->bootEloquent();
 
-            if($options['events']) $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher);
+            if($params['events']) $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher);
 
-            if($options['global']) $capsule->setAsGlobal();
+            if($params['global']) $capsule->setAsGlobal();
 
-            if($options['log']) $capsule->getConnection()->enableQueryLog();
+            if($params['log']) $capsule->getConnection()->enableQueryLog();
 
         return $capsule;
     }
