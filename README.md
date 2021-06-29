@@ -1,6 +1,6 @@
 # Laragento LAravel MAgento Micro services
 
-Magento 2 has legacy outdated code based on Zend Framework 1 with realy ugly ORM. 
+Magento 2 has legacy code based on abandoned Zend Framework 1 with realy ugly ORM on top of outdated Zend_DB. Zend_DB even not hte latest version. 
 
 This repo is a collection of Model classes that allows you to get data directly from a Magento 2 database using modern **ORM**.
 
@@ -132,3 +132,9 @@ var_dump($user->name);
 More about Eloquent you can watch here:
 
 https://www.youtube.com/watch?v=uyQH90okBNQ&list=PL8nVHL94VZ18EGJX9iSR01Xx7vgzX6Uar
+
+# Integration with Magento 2 / 1 Framework 
+add to the **app/bootstrap.php**
+```
+
+```
