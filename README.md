@@ -19,11 +19,32 @@ All Laravel applications include Tinker by default. However, you may install Tin
 composer create-project laravel/laravel laragento 
 cd laragento
 composer require laravel/tinker
+composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
 ```
+
+Set proper DB connect in the **.env**  file:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
 
 # Usage
 
 Tinker allows you to interact with your entire Laravel application on the command line, including your Eloquent models (Laragento), jobs, events, and more. To enter the Tinker environment, run the tinker Artisan command:
 ```
 php artisan tinker
+
+$products = Laragento\Models\CatalogProductEntity::first();
+
+$products = Laragento\Models\CatalogProductEntity::where('sku', '21157');
+
+$products = Laragento\Models\CatalogProductEntity::where('sku', '21157')->with('catalog_product_entity_varchars')->get();
+
 ```
+
