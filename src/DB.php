@@ -5,12 +5,9 @@ namespace Laragento;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 /**
- * Class Database
- *
- * @package Corcel
- * @author Junior Grossi <juniorgro@gmail.com>
+ * Class DB
  */
-class Database
+class DB
 {
     /**
      * @var array
@@ -34,6 +31,14 @@ class Database
         $params = array_merge(static::$baseParams, $params);
         $capsule->addConnection($params);
         $capsule->bootEloquent();
+        
+         $capsule->bootEloquent();
+
+            if($options['events']) $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher);
+
+            if($options['global']) $capsule->setAsGlobal();
+
+            if($options['log']) $capsule->getConnection()->enableQueryLog();
 
         return $capsule;
     }
