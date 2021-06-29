@@ -1,6 +1,8 @@
-# Laragento LAravel MAgento Micro service 
+# Laragento LAravel MAgento Micro services
 
-A collection of Model classes that allows you to get data directly from a Magento 2 database.
+Magento 2 has legacy outdatab codebased based on Zend Framework 1 and with realy ugly ORM. 
+
+This repo is a collection of Model classes that allows you to get data directly from a Magento 2 database using modern **ORM**.
 
 laragento is a collection of PHP classes built on top of Eloquent ORM (from Laravel framework), that provides a fluent interface to connect and get data directly from a Magento database.
 
