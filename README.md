@@ -142,12 +142,18 @@ cd orm
 composer require genaker/laragento @dev
 ```
 
+Run this command. Magento 2 uses outdate Monolog has conflict in the composers: 
+
+```
+find ./orm/vendor/composer/ -type f -exec sed -i -e 's/Monolog/Monolog2/g' {} \;
+```
+
 add to the **app/bootstrap.php** aditional autoloader 
 ```
 # After This
 require_once __DIR__ . '/autoload.php';
 # Insert This
-require_one __DIR__ . '/../tmp/vendor/autoload.php';
+require_once __DIR__ . '/../orm/vendor/autoload.php';
 
 ```
 
