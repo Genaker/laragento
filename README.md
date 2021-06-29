@@ -83,6 +83,14 @@ $products = Laragento\Models\CatalogProductEntity::where('sku', '21157');
 
 $products = Laragento\Models\CatalogProductEntity::where('sku', '21157')->with('catalog_product_entity_varchars')->get();
 
+$orders = Laragento\Models\SalesOrder::limit(10)->with('sales_order_items', 'sales_invoices', 'sales_order_payments', 'sales_creditmemos', 'sales_order_addresses', 'sales_shipments', 'customer_entity')->get(); 
+$orders->toJson();
+
+$creditMemo = Laragento\Models\SalesCreditmemo::limit(1)->with('sales_order','sales_creditmemo_items','sales_creditmemo_comments', 'sales_creditmemo_items')->get(); $creditMemo->toArray()
+
+$invoices = App\Models\SalesInvoice::limit(1)->with('sales_order','sales_invoice_items','sales_invoice_comments')->get(); $invoices->toJson();
+
+
 ```
 
 # Laravel/Eloquent ans static::methods
