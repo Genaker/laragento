@@ -134,7 +134,19 @@ More about Eloquent you can watch here:
 https://www.youtube.com/watch?v=uyQH90okBNQ&list=PL8nVHL94VZ18EGJX9iSR01Xx7vgzX6Uar
 
 # Integration with Magento 2 / 1 Framework 
-add to the **app/bootstrap.php**
+
+Install this ORM to the separete folder 
 ```
+mkdir orm
+cd orm
+composer require genaker/laragento @dev
+```
+
+add to the **app/bootstrap.php** aditional autoloader 
+```
+# After This
+require_once __DIR__ . '/autoload.php';
+# Insert This
+require_one __DIR__ . '/../tmp/vendor/autoload.php';
 
 ```
