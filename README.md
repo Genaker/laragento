@@ -85,3 +85,28 @@ $products = Laragento\Models\CatalogProductEntity::where('sku', '21157')->with('
 
 ```
 
+# Laravel/Eloquent ans static::methods
+
+Some Mmagento 2 bloatware lovers hates static methods. For that guys Laravel has solution...
+
+Static Example: 
+```
+$user = User::find(1);
+var_dump($user->name);
+```
+
+Laravel isn't using a static method, you are. Another way to do this which you are probably looking for is to use dependency injection, which Laravel makes very easy because it can be done automatically. So in whatever class you are using your User model in, you should be setting up something like this in the constructor...
+
+```
+public function __construct(User $user)
+{
+    $this->user = $user;
+}
+```
+
+And then you can modify your code to not use the static bindings.
+
+```
+$user = $this->user->find(1);
+var_dump($user->name);
+```
