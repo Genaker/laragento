@@ -1,5 +1,7 @@
 <?php
 
+$start = microtime(TRUE);
+
 require __DIR__ . '/vendor/autoload.php';
 
 $params = [
@@ -11,6 +13,10 @@ $params = [
 ];
 Laragento\DB::connect($params);
 
-$products = Laragento\Models\CatalogProductEntity::all();
+$products = Laragento\Models\CatalogProductEntity::limit(10)->get();
 
 var_dump($products);
+
+$end = microtime(TRUE);
+
+echo "\nThe code took " . ($end - $start) . " seconds to complete.\n";
