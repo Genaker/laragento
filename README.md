@@ -150,3 +150,14 @@ require_once __DIR__ . '/autoload.php';
 require_one __DIR__ . '/../tmp/vendor/autoload.php';
 
 ```
+
+
+# Magento GraphQL for Laravel/Eloquent
+
+Lighthouse is a GraphQL framework that integrates with MAgento Elouquent Laravel application. It takes the best ideas of both and combines them to solve common tasks with ease and offer flexibility when you need it.
+
+More information:
+
+https://lighthouse-php.com/
+
+It is realy Cool Magento developers can enjoy building modern software and not just debug and troubleshoot broken MAgento 2 
