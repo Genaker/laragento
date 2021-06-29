@@ -27,7 +27,7 @@ $params = array(
     'database'  => 'database_name',
     'username'  => 'username',
     'password'  => 'pa$$word',
-    'prefix'    => '' // default prefix is 'wp_', you can change to your own prefix
+    'prefix'    => '' 
 );
 Laragento\DB::connect($params);
 ```
@@ -37,7 +37,7 @@ You can specify all Eloquent params, but some are default (but you can override 
 'host'      => 'localhost',
 'charset'   => 'utf8',
 'collation' => 'utf8_unicode_ci',
-'prefix'    => '', // Specify the prefix for MAgento tables, default prefix is ''
+'prefix'    => '', 
 ```
 
 # LAravel MAgento with Tinker (REPL)
