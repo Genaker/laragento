@@ -145,7 +145,8 @@ composer require genaker/laragento @dev
 Run this command. Magento 2 uses outdate Monolog has conflict in the composers: 
 
 ```
-find ./orm/vendor/composer/ -type f -exec sed -i -e 's/Monolog/Monolog2/g' {} \;
+find ./orm/vendor/ -type f -exec sed -i -e 's/Monolog/Monolog2/g' {} \;
+mv ./orm/vendor/monolog/monolog/src/Monolog/ vendor/monolog/monolog/src/Monolog2/
 ```
 
 add to the **app/bootstrap.php** aditional autoloader 
@@ -156,7 +157,10 @@ require_once __DIR__ . '/autoload.php';
 require_once __DIR__ . '/../orm/vendor/autoload.php';
 
 ```
-
+Overhead of loading LAravel with 100 product in magento is : 0.0051751136779785 seconds 
+10 products: 0.0026481151580811 seconds.
+Just autoload:  0.00015616416931152 seconds.
+So, there no overhead of adding this life hack to Magento. Magento 2 framework is an instinct dinosaurs. 
 
 # Magento GraphQL for Laravel/Eloquent
 
