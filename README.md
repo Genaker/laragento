@@ -6,11 +6,45 @@ laragento is a collection of PHP classes built on top of Eloquent ORM (from Lara
 
 You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app in the other side querying those data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project that uses Composer.
 
+# Install Laragento 
+
+You need to use Composer to install Laragento into your project:
+
+
+```
+composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
+composer require Genaker/laragento
+```
+# Other PHP Framework (not Laravel) Setup
+
+Here you have to configure the database to work with MAgento. First, you should include the Composer autoload file if not already loaded:
+```
+require __DIR__ . '/vendor/autoload.php';
+```
+Now you must set your Magento2 database params:
+```
+$params = array(
+    'database'  => 'database_name',
+    'username'  => 'username',
+    'password'  => 'pa$$word',
+    'prefix'    => '' // default prefix is 'wp_', you can change to your own prefix
+);
+Laragento\DB::connect($params);
+```
+You can specify all Eloquent params, but some are default (but you can override them).
+```
+'driver'    => 'mysql',
+'host'      => 'localhost',
+'charset'   => 'utf8',
+'collation' => 'utf8_unicode_ci',
+'prefix'    => '', // Specify the prefix for MAgento tables, default prefix is ''
+```
+
 # LAravel MAgento with Tinker (REPL)
 
 Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsySH package.
 
-# Installation
+# Tinker Installation
 
 All Laravel applications include Tinker by default. However, you may install Tinker using Composer if you have previously removed it from your application:
 
@@ -20,6 +54,7 @@ composer create-project laravel/laravel laragento
 cd laragento
 composer require laravel/tinker
 composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
+composer require Genaker/laragento
 ```
 
 Set proper DB connect in the **.env**  file:
@@ -34,7 +69,7 @@ DB_PASSWORD=
 ```
 
 
-# Usage
+# Tinker Usage
 
 Tinker allows you to interact with your entire Laravel application on the command line, including your Eloquent models (Laragento), jobs, events, and more. To enter the Tinker environment, run the tinker Artisan command:
 ```
