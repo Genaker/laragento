@@ -8,6 +8,16 @@ laragento is a collection of PHP classes built on top of Eloquent ORM (from Lara
 
 You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app in the other side querying those data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project that uses Composer.
 
+# Magento ORM Concept
+
+Models are the essence of the ORM. A model is an abstraction that represents a magento table in your database. In Larafento, it is a class that extends Model.
+
+The model tells Eloquent several things about the entity it represents, such as the name of the table in the database and which columns it has (and their data types).
+
+A model in Eloquent has a name. This name does not have to be the same name of the table it represents in the database. Usually, models have singular names (such as User) while tables have pluralized names (such as Users), although this is fully configurable.
+
+
+
 # Install Laragento 
 
 You need to use Composer to install Laragento into your project:
@@ -118,3 +128,7 @@ And then you can modify your code to not use the static bindings.
 $user = $this->user->find(1);
 var_dump($user->name);
 ```
+
+More about Eloquent you can watch here:
+
+https://www.youtube.com/watch?v=uyQH90okBNQ&list=PL8nVHL94VZ18EGJX9iSR01Xx7vgzX6Uar
