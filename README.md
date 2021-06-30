@@ -171,3 +171,63 @@ More information:
 https://lighthouse-php.com/
 
 It is realy Cool Magento developers can enjoy building modern software and not just debug and troubleshoot broken MAgento 2 
+
+# Debug Queries using the Laravel Query Log
+Laravel query log that collects all queries within a request. You can enable this log, run your query and dump the output.
+
+```
+DB::enableQueryLog();
+
+App\User::query()
+    ->where('created_at', '<', now()->subYear())
+    ->with('assignedApps', 'courses')
+    ->orderBy('email', 'asc')
+    ->limit(5)
+    ->get();
+
+dump(DB::getQueryLog());
+```
+
+# Listening For Query Events
+
+If you would like to receive each SQL query executed by your application, you may use the listen method. This method is useful for logging queries or debugging. You may register your query listener in a service provider:
+
+app/Providers/AppServiceProvider.php
+
+```
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        DB::listen(function ($query) {
+           var_dump(
+                $query->sql,
+                $query->bindings,
+                $query->time
+            );
+        });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+```
