@@ -1,22 +1,24 @@
 # Laragento LAravel MAgento Micro services
 
-Magento 2 has legacy code based on abandoned Zend Framework 1 with realy ugly ORM on top of outdated Zend_DB. Zend_DB even not hte latest version. 
+Magento 2 has legacy code based on abandoned **Zend Framework 1** with really ugly ORM on top of outdated **Zend_DB**. Zend_DB is not even in the latest version. 
 
 This repo is a collection of Model classes that allows you to get data directly from a Magento 2 database using modern **ORM**.
 
-laragento is a collection of PHP classes built on top of Eloquent ORM (from Laravel framework), that provides a fluent interface to connect and get data directly from a Magento database.
+laragento is a collection of PHP classes built on top of **Eloquent ORM** (from Laravel framework), that provides a fluent interface to connect and get data directly from a Magento database.
 
-You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app in the other side querying those data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project that uses Composer.
+You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app  (Symfony/Laravel/Lumen/Vanilla.PHP etc.) and querying that data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project that uses Composer.
+
+# History 
+
+After releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reuse Adobe Commerce broken core framework bloatware.
 
 # Magento ORM Concept
 
-Models are the essence of the ORM. A model is an abstraction that represents a magento table in your database. In Larafento, it is a class that extends Model.
+Data is the essence of any web application. Models are the essence of the ORM. A model is an abstraction that represents a magento table in the database. In Larafento, it is a class that extends base Eloquent/Model.
 
-The model tells Eloquent several things about the entity it represents, such as the name of the table in the database and which columns it has (and their data types).
+The model tells Eloquent several things about the entity it represents, such as the name of the table in the database and optionally which columns it has (and their data types).
 
-A model in Eloquent has a name. This name does not have to be the same name of the table it represents in the database. Usually, models have singular names (such as User) while tables have pluralized names (such as Users), although this is fully configurable.
-
-
+A model has a name. This name does not have to be the same name of the Magento table it represents in the database. catalog_product_entity -> CatalogProductEntity. 
 
 # Install Laragento 
 
@@ -103,9 +105,9 @@ $invoices = App\Models\SalesInvoice::limit(1)->with('sales_order','sales_invoice
 
 ```
 
-# Laravel/Eloquent ans static::methods
+# Laravel/Eloquent and static::methods
 
-Some Mmagento 2 bloatware lovers hates static methods. For that guys Laravel has solution...
+Some Magento 2 bloatware lovers hate static methods. For those guys Laravel has a solution...
 
 Static Example: 
 ```
@@ -135,21 +137,21 @@ https://www.youtube.com/watch?v=uyQH90okBNQ&list=PL8nVHL94VZ18EGJX9iSR01Xx7vgzX6
 
 # Integration with Magento 2 / 1 Framework 
 
-Install this ORM to the separete folder 
+Install this ORM to the separate folder 
 ```
 mkdir orm
 cd orm
 composer require genaker/laragento @dev
 ```
 
-Run this command. Magento 2 uses outdate Monolog has conflict in the composers: 
+Run this command. Magento 2 uses outdated Monolog version and has conflict in the composers: 
 
 ```
 find ./orm/vendor/ -type f -exec sed -i -e 's/Monolog/Monolog2/g' {} \;
 mv ./orm/vendor/monolog/monolog/src/Monolog/ vendor/monolog/monolog/src/Monolog2/
 ```
 
-add to the **app/bootstrap.php** aditional autoloader 
+add to the **app/bootstrap.php** additional autoloader 
 ```
 # After This
 require_once __DIR__ . '/autoload.php';
@@ -160,17 +162,17 @@ require_once __DIR__ . '/../orm/vendor/autoload.php';
 Overhead of loading LAravel with 100 product in magento is : 0.0051751136779785 seconds 
 10 products: 0.0026481151580811 seconds.
 Just autoload:  0.00015616416931152 seconds.
-So, there no overhead of adding this life hack to Magento. Magento 2 framework is an instinct dinosaurs. 
+So, there is no overhead of adding this life hack to Magento. Magento 2 framework is an instinct dinosaur. 
 
 # Magento GraphQL for Laravel/Eloquent
 
-Lighthouse is a GraphQL framework that integrates with MAgento Elouquent Laravel application. It takes the best ideas of both and combines them to solve common tasks with ease and offer flexibility when you need it.
+Lighthouse is a GraphQL framework that integrates with MAgento Eloquent Laravel application. It takes the best ideas of both and combines them to solve common tasks with ease and offer flexibility when you need it.
 
 More information:
 
 https://lighthouse-php.com/
 
-It is realy Cool Magento developers can enjoy building modern software and not just debug and troubleshoot broken MAgento 2 
+It is really Cool Magento developers can enjoy building modern software and not just debug and troubleshoot broken MAgento 2 
 
 # Debug Queries using the Laravel Query Log
 Laravel query log that collects all queries within a request. You can enable this log, run your query and dump the output.
