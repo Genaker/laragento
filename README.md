@@ -12,6 +12,10 @@ You can use legacy MAgento 2 as the backend (administration panel), and any othe
 
 After releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reuse Adobe Commerce broken core framework bloatware.
 
+**Why Laravel and Eloquent?**
+
+Laravel is the most popular PHP framework. I have used different ORMs and Eloquent is the best.
+
 # Magento ORM Concept
 
 Data is the essence of any web application. Models are the essence of the ORM. A model is an abstraction that represents a magento table in the database. In Larafento, it is a class that extends base Eloquent/Model.
@@ -30,7 +34,6 @@ If you have any issues and Enterprise (Adobe Commerce) Version support create a 
 # Install Laragento 
 
 You need to use Composer to install Laragento into your project:
-
 
 ```
 composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
@@ -62,6 +65,8 @@ You can specify all Eloquent params, but some are default (but you can override 
 'prefix'    => '', 
 ```
 
+However it will be better to use it as a separate Magento-les microservice entry point in the separate directory together with Laravel or Lumen.
+
 # LAravel MAgento with Tinker (REPL)
 
 Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsySH package.
@@ -89,7 +94,6 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-
 # Tinker Usage
 
 Tinker allows you to interact with your entire Laravel application on the command line, including your Eloquent models (Laragento), jobs, events, and more. To enter the Tinker environment, run the tinker Artisan command:
@@ -113,6 +117,8 @@ $invoices = Laragento\Models\SalesInvoice::limit(1)->with('sales_order','sales_i
 # Example of the Magento Order to ERM implementation 
 
 ```
+require __DIR__ . '/vendor/autoload.php';
+
 $orders = Laragento\Models\SalesOrder::whereNull('sync_status')->with('sales_order_items', 'sales_invoices', 'sales_order_payments', 'sales_creditmemos', 'sales_order_addresses', 'sales_shipments', 'customer_entity', 'sales_payment_transactions')->get();
  
 foreach ($oreders as $order) {
