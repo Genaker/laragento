@@ -20,6 +20,13 @@ The model tells Eloquent several things about the entity it represents, such as 
 
 A model has a name. This name does not have to be the same name of the Magento table it represents in the database. catalog_product_entity -> CatalogProductEntity. 
 
+# Documentation 
+This solution doesn't require documentation because it reuses a widely used software development tools vs Magento 2 in house built framework. 
+
+**Official Eloquent Documentation:** https://laravel.com/docs/8.x/eloquent 
+
+If you have any issues and Enterprise (Adobe Commerce) Version support create a ticket or drop me email at: yegorshytikov@gmail.com
+
 # Install Laragento 
 
 You need to use Composer to install Laragento into your project:
@@ -29,7 +36,8 @@ You need to use Composer to install Laragento into your project:
 composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
 composer require Genaker/laragento
 ```
-# Other PHP Framework (not Laravel) Setup
+
+# Other PHP Framework (not Laravel and Magento) Setup
 
 Here you have to configure the database to work with MAgento. First, you should include the Composer autoload file if not already loaded:
 ```
@@ -61,7 +69,6 @@ Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsyS
 # Tinker Installation
 
 All Laravel applications include Tinker by default. However, you may install Tinker using Composer if you have previously removed it from your application:
-
 
 ```
 composer create-project laravel/laravel laragento 
@@ -100,10 +107,26 @@ $orders->toJson();
 
 $creditMemo = Laragento\Models\SalesCreditmemo::limit(1)->with('sales_order','sales_creditmemo_items','sales_creditmemo_comments', 'sales_creditmemo_items')->get(); $creditMemo->toArray()
 
-$invoices = App\Models\SalesInvoice::limit(1)->with('sales_order','sales_invoice_items','sales_invoice_comments')->get(); $invoices->toJson();
-
+$invoices = Laragento\Models\SalesInvoice::limit(1)->with('sales_order','sales_invoice_items','sales_invoice_comments')->get(); $invoices->toJson();
 
 ```
+# Example of the Magento Order to ERM implementation 
+
+```
+$orders = Laragento\Models\SalesOrder::whereNull('sync_status')->with('sales_order_items', 'sales_invoices', 'sales_order_payments', 'sales_creditmemos', 'sales_order_addresses', 'sales_shipments', 'customer_entity', 'sales_payment_transactions')->get();
+ 
+foreach ($oreders as $order) {
+    $response = $erp->orderAPI($order->toJson());
+    if ($response->responseCode === 200) {
+        $order->sync_status = 'sent_to_erp';
+        $order->save();
+    } else {
+        echo "Error";
+    }
+}
+
+```
+No ObjectManager, DI and other stuff required. 
 
 # Laravel/Eloquent and static::methods
 
