@@ -20,6 +20,14 @@ class DB
         'prefix' => '',
     ];
 
+    
+    public function getMageConfig($path = false) {
+        if ($path !== false) {
+            return include $path;
+        }
+        return false;
+    }
+    
     /**
      * @param array $params
      * @return \Illuminate\Database\Capsule\Manager
