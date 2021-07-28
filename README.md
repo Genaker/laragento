@@ -6,11 +6,11 @@ This repo is a collection of Model classes that allows you to get data directly 
 
 Laragento is a collection of PHP classes built on top of **Eloquent ORM** (from Laravel framework), that provides a fluent interface to connect and get data directly from a Magento database.
 
-You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app  (Symfony/Laravel/Lumen/Vanilla.PHP etc.) and querying that data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project using Composer.
+You can use legacy MAgento 2 as the backend (administration panel), and any other PHP app  (Symfony/Laravel/Lumen/Vanilla.PHP etc.) and query that data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project using Composer.
 
 # History 
 
-After releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reuse Adobe Commerce broken core framework bloatware.
+After releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
 
 **Why Laravel and Eloquent?**
 
