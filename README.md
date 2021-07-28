@@ -24,6 +24,28 @@ The model tells Eloquent several things about the entity it represents, such as 
 
 A model has a name. This name does not have to be the same name of the Magento table it represents in the database. catalog_product_entity -> CatalogProductEntity. 
 
+# Extand Base Magento Model
+
+Customisations involves creating new Eloquent models that extend Magento base models. By extending a model, you inherit the full functionality of the parent model, while retaining the ability to add customisation, scopes, event listeners, etc. Also Repository patern can be used but it is anther storry. A base model represents a Datase table operation only.  
+
+```
+class ProductSimple extends CatalogProductEntity
+{
+   public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(function ($query) {
+            $query->where('type_id', 'simple');
+        });
+    }
+    
+   public function getBySku(string $sku) {
+        $this->where('sku', $sku);
+   }
+}
+```
+
 # Documentation 
 This solution doesn't require documentation because it reuses a widely used software development tools vs Magento 2 in house built framework. 
 
