@@ -92,7 +92,7 @@ You can specify all Eloquent params, but some are default (but you can override 
 
 However it will be better to use it as a separate Magento-les microservice entry point in the separate directory together with Laravel or Lumen.
 
-# LAravel MAgento with Tinker (REPL)
+# LAravel Magento with Tinker (REPL)
 
 Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsySH package.
 
