@@ -4,10 +4,9 @@ Magento 2 has legacy code based on abandoned **Zend Framework 1** with really ug
 
 This repo is a collection of Model classes that allows you to get data directly from a Magento 2 database using modern **ORM**.
 
-Laragento is a collection of PHP classes built on top of **Eloquent ORM** (from **Laravel** framework), that provides a fluent interface to connect and get data directly from a Magento database.
-
 <img src="https://raw.githubusercontent.com/Genaker/laragento/main/LaragentoMgentoLaravel.png" alt="LaraGento">
 
+Laragento is a collection of PHP classes built on top of **Eloquent ORM** (from **Laravel** framework), that provides a fluent interface to connect and get data directly from a Magento database.
 
 You can use legacy Magento 2 as the backend (administration panel), and any other PHP app  (Symfony/Laravel/Lumen/Vanilla.PHP etc.) and query that data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project using Composer.
 
