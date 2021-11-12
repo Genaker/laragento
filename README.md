@@ -65,6 +65,11 @@ composer require Genaker/laragento
 ```
 The installation via Composer is not recommended. Please use the Other PHP Framework instalation by adding aditional autoload file instead of the Composer version. We are not able to provide compatibility to all Magento versions anymore. Also Magento uses outdated packages and Eloquent replaces that dependencies with the new one and that produces the issues. But, you can try, there is a way to fix. Read -> **Integration with Magento 2 / 1 Framework**
 
+#Install without Eloquent. Minimal 
+```
+composer require illuminate/database
+```
+
 # Other PHP Framework (not Laravel and Magento) Setup
 
 Here you have to configure the database to work with Magento. First, you should include the Composer autoload file if not already loaded:
