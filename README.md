@@ -94,6 +94,25 @@ You can specify all Eloquent params, but some are default (but you can override 
 'collation' => 'utf8_unicode_ci',
 'prefix'    => '', 
 ```
+Magento automated DB connection sript:
+```
+	$conf = include(BP . "/app/etc/env.php");
+	$db = $conf["db"]["connection"]["default"]; 
+	$host = $db["host"];
+	$user = $db["username"];
+	$password = $db["password"];
+	$dbname = $db["dbname"];
+
+	$params = array(
+		'host' => $db["host"],
+		'database' => $dbname,
+		'username' => $user,
+		'password' => $password,
+		'prefix' => '' 
+	);
+   
+   Laragento\DB::connect($params);
+```
 
 However it will be better to use it as a separate Magento-les microservice entry point in the separate directory together with Laravel or Lumen.
 
