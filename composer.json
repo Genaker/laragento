@@ -6,7 +6,7 @@
     
     "require": {
         "php": ">=7.3",
-        "illuminate/database": "dev-8.x",
+        "illuminate/database": "dev-magento",
         "fakerphp/faker": "^1.10",
         "hautelook/phpass": "0.3.*",
         "thunderer/shortcode": "^0.7.3",
