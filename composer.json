@@ -6,10 +6,7 @@
     
     "require": {
         "php": ">=7.3",
-        "illuminate/database": "dev-fix",
-        "fakerphp/faker": "^1.10",
-        "hautelook/phpass": "0.3.*",
-        "thunderer/shortcode": "^0.7.3"
+        "illuminate/database": "dev-fix"
     },
     "require-dev": {
         "laravel/legacy-factories": "^1.0",
