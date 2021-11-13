@@ -10,7 +10,7 @@
         "fakerphp/faker": "^1.10",
         "hautelook/phpass": "0.3.*",
         "thunderer/shortcode": "^0.7.3",
-        "kirschbaum-development/eloquent-power-joins": "^2.4"
+        "kirschbaum-development/eloquent-power-joins": "^2.5"
     },
     "require-dev": {
         "laravel/legacy-factories": "^1.0",
