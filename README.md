@@ -129,7 +129,7 @@ composer create-project laravel/laravel laragento
 cd laragento
 composer require laravel/tinker
 composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
-composer require Genaker/laragento
+composer require Genaker/laragento:dev-main
 ```
 
 Set proper DB connect in the **.env**  file:
