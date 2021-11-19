@@ -57,6 +57,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Collection|ReportViewedProductIndex[] $report_viewed_product_indices
  * @property Collection|WeeeTax[] $weee_taxes
  * @property Collection|WishlistItem[] $wishlist_items
+ * @property Collection|UrlRewrite[] $url_rewrites
  *
  * @package Laragento\Models
  */
@@ -147,6 +148,11 @@ class CatalogProductEntity extends Model
 	public function catalog_product_entity_varchars()
 	{
 		return $this->hasMany(CatalogProductEntityVarchar::class, 'entity_id');
+	}
+	
+	public function url_rewrites()
+	{
+		return $this->hasMany(UrlRewrite::class, strtolower('Entity_iD'));
 	}
 
 	public function catalog_product_frontend_actions()
