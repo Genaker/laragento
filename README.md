@@ -311,3 +311,13 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 ```
+
+## Seed Magento table data
+
+Using Laragento togather with https://github.com/orangehill/iseed we can generate a new seed file based on data from the existing Magento database table.
+
+
+
+
+
+
