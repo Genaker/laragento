@@ -1,4 +1,4 @@
-# Laragento Laravel Magento Micro services
+# Laragento Laravel Magento Microservices
 
 Magento 2 has legacy code based on abandoned **Zend Framework 1** with really ugly ORM on top of outdated **Zend_DB**. Zend_DB is not even in the latest version. 
 
@@ -12,7 +12,7 @@ You can use legacy Magento 2 as the backend (administration panel), and any othe
 
 # History 
 
-After releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
+After the releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing Magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
 
 **Why Laravel and Eloquent?**
 
@@ -28,7 +28,7 @@ A model has a name. This name does not have to be the same name of the Magento t
 
 # Extand Base Magento Model
 
-Customisations involves creating new Eloquent models that extend Magento base models. By extending a model, you inherit the full functionality of the parent model, while retaining the ability to add customisation, scopes, event listeners, etc. Also Repository patern can be used but it is anther storry. A base model represents a Datase table operation only.  
+Customizations involve creating new Eloquent models that extend Magento base models. By extending a model, you inherit the full functionality of the parent model, while retaining the ability to add customization, scopes, event listeners, etc. Also, a Repository pattern can be used but it is another story. A base model represents a Datase table operation only.  
 
 ```
 class ProductSimple extends CatalogProductEntity
@@ -49,11 +49,11 @@ class ProductSimple extends CatalogProductEntity
 ```
 
 # Documentation 
-This solution doesn't require documentation because it reuses a widely used software development tools vs Magento 2 in house built framework. 
+This solution doesn't require documentation because it reuses a widely used software development tool vs Magento 2 in-house built framework. 
 
 **Official Eloquent Documentation:** https://laravel.com/docs/8.x/eloquent 
 
-If you have any issues and Enterprise (Adobe Commerce) Version support create a ticket or drop me email at: yegorshytikov@gmail.com
+If you have any issues and Enterprise (Adobe Commerce) Version support create a ticket or drop me an email at: yegorshytikov@gmail.com
 
 # Install Laragento 
 
@@ -63,7 +63,7 @@ You need to use Composer to install Laragento into your project:
 composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Genaker/laragento", "trunk-path": "master"}'
 composer require Genaker/laragento
 ```
-The installation via Composer is not recommended. Please use the Other PHP Framework instalation by adding aditional autoload file instead of the Composer version. We are not able to provide compatibility to all Magento versions anymore. Also Magento uses outdated packages and Eloquent replaces that dependencies with the new one and that produces the issues. But, you can try, there is a way to fix. Read -> **Integration with Magento 2 / 1 Framework**
+The installation via Composer is not recommended. Please use the Other PHP Framework installation by adding an additional autoload file instead of the Composer version. We are not able to provide compatibility to all Magento versions anymore. Also, Magento uses outdated packages and Eloquent replaces those dependencies with new ones and that produces the issues. But, you can try, there is a way to fix. Read -> **Integration with Magento 2 / 1 Framework**
 
 #Install without Eloquent. Minimal 
 ```
@@ -94,7 +94,7 @@ You can specify all Eloquent params, but some are default (but you can override 
 'collation' => 'utf8_unicode_ci',
 'prefix'    => '', 
 ```
-Magento automated DB connection sript:
+Magento automated DB connection script:
 ```
 	$conf = include(BP . "/app/etc/env.php");
 	$db = $conf["db"]["connection"]["default"]; 
@@ -132,7 +132,7 @@ composer config repositories.foo '{"type": "vcs", "url": "https://github.com/Gen
 composer require Genaker/laragento:dev-main
 ```
 
-Set proper DB connect in the **.env**  file:
+Set proper DB to connect in the **.env**  file:
 
 ```
 DB_CONNECTION=mysql
@@ -181,7 +181,7 @@ foreach ($oreders as $order) {
 }
 
 ```
-No ObjectManager, DI and other stuff required. 
+No ObjectManager, DI, and other stuff is required. 
 
 # Laravel/Eloquent and static::methods
 
@@ -314,7 +314,7 @@ class AppServiceProvider extends ServiceProvider
 
 ## Seed Magento table data
 
-Using Laragento togather with https://github.com/orangehill/iseed we can generate a new seed file based on data from the existing Magento database table.
+Using Laragento together with https://github.com/orangehill/iseed we can generate a new seed file based on data from the existing Magento database table.
 
 
 
