@@ -116,6 +116,12 @@ Magento automated DB connection script:
 
 However it will be better to use it as a separate Magento-les microservice entry point in the separate directory together with Laravel or Lumen.
 
+To make it simple, we configuration to json and use it and read config.json from the original config
+
+```
+php -r '$x = include("app/etc/env.php"); echo json_encode($x);' > config.json
+```
+
 # LAravel Magento with Tinker (REPL)
 
 Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsySH package.
