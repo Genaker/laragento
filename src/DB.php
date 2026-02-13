@@ -39,8 +39,6 @@ class DB
         $params = array_merge(static::$baseParams, $params);
         $capsule->addConnection($params);
         $capsule->bootEloquent();
-        
-         $capsule->bootEloquent();
 
             if(isset($params['events'])) $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher);
 

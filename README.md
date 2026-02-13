@@ -12,7 +12,7 @@ You can use legacy Magento 2 as the backend (administration panel), and any othe
 
 # History 
 
-After the releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing Magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
+After the releases of the VueStorefront and Hyva Theme (A brand-new frontend for Magento 2 without reusing Magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
 
 **Why Laravel and Eloquent?**
 
@@ -20,7 +20,7 @@ Laravel is the most popular PHP framework. I have used different ORMs and Eloque
 
 # Magento ORM Concept
 
-Data is the essence of any web application. Models are the essence of the ORM. A model is an abstraction that represents a magento table in the database. In Larafento, it is a class that extends base Eloquent/Model.
+Data is the essence of any web application. Models are the essence of the ORM. A model is an abstraction that represents a magento table in the database. In Laragento, it is a class that extends base Eloquent/Model.
 
 The model tells Eloquent several things about the entity it represents, such as the name of the table in the database and optionally which columns it has (and their data types).
 
@@ -122,7 +122,7 @@ To make it simple, we configuration to json and use it and read config.json from
 php -r '$x = include("app/etc/env.php"); echo json_encode($x);' > config.json
 ```
 
-# LAravel Magento with Tinker (REPL)
+# Laravel Magento with Tinker (REPL)
 
 Laravel Tinker is a powerful REPL for the Laravel framework, powered by the PsySH package.
 
@@ -176,7 +176,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $orders = Laragento\Models\SalesOrder::whereNull('sync_status')->with('sales_order_items', 'sales_invoices', 'sales_order_payments', 'sales_creditmemos', 'sales_order_addresses', 'sales_shipments', 'customer_entity', 'sales_payment_transactions')->get();
  
-foreach ($oreders as $order) {
+foreach ($orders as $order) {
     $response = $erp->orderAPI($order->toJson());
     if ($response->responseCode === 200) {
         $order->sync_status = 'sent_to_erp';
@@ -243,7 +243,7 @@ require_once __DIR__ . '/autoload.php';
 require_once __DIR__ . '/../orm/vendor/autoload.php';
 
 ```
-Overhead of loading LAravel with 100 product in magento is : 0.0051751136779785 seconds 
+Overhead of loading Laravel with 100 product in magento is : 0.0051751136779785 seconds 
 10 products: 0.0026481151580811 seconds.
 Just autoload:  0.00015616416931152 seconds.
 So, there is no overhead of adding this life hack to Magento. Magento 2 framework is an instinct dinosaur. 
