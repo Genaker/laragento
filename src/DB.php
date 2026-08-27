@@ -38,15 +38,19 @@ class DB
 
         $params = array_merge(static::$baseParams, $params);
         $capsule->addConnection($params);
+
+        if (isset($params['events'])) {
+            $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher());
+        }
+        if (isset($params['global'])) {
+            $capsule->setAsGlobal();
+        }
+
         $capsule->bootEloquent();
-        
-         $capsule->bootEloquent();
 
-            if(isset($params['events'])) $capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher);
-
-            if(isset($params['global'])) $capsule->setAsGlobal();
-
-            if(isset($params['log'])) $capsule->getConnection()->enableQueryLog();
+        if (isset($params['log'])) {
+            $capsule->getConnection()->enableQueryLog();
+        }
 
         return $capsule;
     }

@@ -10,6 +10,113 @@ Laragento is a collection of PHP classes built on top of **Eloquent ORM** (from 
 
 You can use legacy Magento 2 as the backend (administration panel), and any other PHP app  (Symfony/Laravel/Lumen/Vanilla.PHP etc.) and query that data (as a Model layer). It's easier to use Laragento with Laravel, but you're free to use it with any PHP project using Composer.
 
+# A Full Laravel App on Top of the Model Library
+
+This repo is now also a runnable Laravel 11 application built on the model
+library above -- the same benchmark family as
+[GoGento](https://github.com/Genaker/GoGento) and
+[gogento-rust](https://github.com/Genaker/RustGento), this time in Laravel:
+a Magmi-style bulk CSV importer using Eloquent's own bulk `insert()`/
+`upsert()`, and a small storefront (home/category/product pages) reading
+through the Eloquent models. Both point at a real Magento 2 database --
+there's no synthetic schema here, no migrations to run, and no seed data
+to generate; every laragento model already maps directly onto the tables
+a real Magento install already has.
+
+## Configuration
+
+Copy `.env.example` to `.env` and point the `DB_*` variables at a real
+Magento 2 database:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=magento
+DB_USERNAME=magento
+DB_PASSWORD=magento
+```
+
+`SESSION_DRIVER`, `CACHE_STORE`, and `QUEUE_CONNECTION` default to
+`file`/`file`/`sync` rather than Laravel's usual `database` -- this app
+never runs `php artisan migrate` against the Magento database (there are
+no migrations in `database/migrations/` at all, deliberately), so nothing
+here can create a `sessions`/`cache`/`jobs` table alongside Magento's own
+360-ish tables. Don't add migrations for this app's own concerns without
+also reconsidering that choice.
+
+## Magmi-Style Bulk Import
+
+```bash
+php artisan magmi:import path/to/products.csv --batch-size=500
+```
+
+`app/Console/Commands/ImportProducts.php`: parses a CSV (the same
+`sku,name,meta_title,url_key,description,short_description,color,size,status,price,weight,special_price,special_from_date,special_to_date`
+shape the GoGento/gogento-rust benchmark uses), resolves SKUs against
+`catalog_product_entity`, bulk-inserts new entities (relying on MySQL's
+consecutive-auto-increment-lock guarantee for a multi-row insert, same
+trick every other importer in this benchmark family uses), buckets
+attribute values by EAV `backend_type`, and batch-upserts each of the 5
+`catalog_product_entity_*` value tables via `DB::table(...)->upsert(...)`
+-- the query builder's own `INSERT ... ON DUPLICATE KEY UPDATE`, not a
+hand-written SQL string. Never a per-row `Model::save()`; see this
+project's own `bench/php_magento_model_import_bench.php` (in the
+gogento-rust repo) for what that costs by comparison.
+
+**Benchmark** (median of 3 runs, `/usr/bin/time -l`, same 1000-row/
+13-attribute CSV gogento-rust's own Go-vs-Rust benchmark uses, same real
+Magento database both this and the plain-PDO/Magento-bootstrap PHP scripts
+in gogento-rust's `bench/` run against):
+
+| | Import time | Max RSS |
+|---|---|---|
+| PHP, plain PDO + Magento bootstrap (no ORM) | 2.90s | 35.2 MB |
+| **Laragento, `magmi:import`** | **4.44s** | **50.5 MB** |
+| PHP, Magento's own `Model::save()` per row | 120.6s | 66.7 MB |
+
+Eloquent's `upsert()` costs a real, measurable ~1.5x over hand-rolled PDO
+on the identical batched-upsert shape against the identical database (the
+query builder's grammar/binding layer isn't free) -- but it buys back
+almost the entire 41x gap `Model::save()` pays for doing this one row at a
+time, while staying fully within Eloquent idiom rather than dropping to
+raw SQL. See the top-level `gogento-rust` repo's README for the full
+Go/Rust/PHP comparison this benchmark is part of.
+
+## Storefront
+
+Three routes, backed by `app/Support/EavFlattener.php` (a small "flatten
+this entity's EAV attributes into a plain array" helper, the same concept
+GoGento's and gogento-rust's repository layers are built around):
+
+| Route | Controller |
+|---|---|
+| `/` | `HomeController` -- catalog stats, a link into the most-populated category |
+| `/category/{id}` | `CategoryController` -- paginated product grid |
+| `/product/{id}` | `ProductController` -- detail page with category breadcrumbs |
+
+```bash
+php artisan serve
+```
+
+## Testing
+
+```bash
+php artisan test
+```
+
+Every test that touches the database calls
+`$this->skipUnlessDatabaseReachable()` first (defined in
+`tests/TestCase.php`) and skips rather than fails if it isn't reachable --
+the same convention GoGento's and gogento-rust's own DB-touching tests
+use, since there's no disposable schema here to spin up in CI. Coverage:
+the three storefront routes (known-good and 404 paths), the import command
+(fresh create, re-import upserts in place rather than duplicating, a
+missing file fails cleanly), and `CoreModelsTest`, which locks in that the
+pre-existing model library's table/primary-key/cast mappings still match a
+real Magento schema -- including a loop that asserts every one of the
+300+ classes in `src/Models/` actually loads.
+
 # History 
 
 After the releases of the VueStorefron and Hyva Theme (A brand-new frontend for Magento 2 without reusing Magento UI and using Laravel ecosystem as a base Alpine.JS / Tailwind CSS) everybody understands that the only way to build a good eCommerce Website is not to use M2 broken legacy frontend/backend functionality. I have been using this library for the last 3 years and see only benefits. Even if you need reimplement functionality from scratch it is much faster than reusing Adobe Commerce broken core framework bloatware.
